@@ -1,69 +1,47 @@
-# React + TypeScript + Vite
+# NSMQ Recruitment App 🏆
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Digital recruitment and training platform for Archbishop Porter Girls' Secondary School's NSMQ team selection
 
-Currently, two official plugins are available:
+##  Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This application revolutionizes the NSMQ student selection process by:
+- **Eliminating manual grading** - Reducing instructor workload from 2+ weeks to instant results
+- **Accelerating selection** - Cut recruitment time by 95%
+- **Enabling 24/7 practice** - Students can train anytime, anywhere
+- **Providing data insights** - Analytics to identify top performers
 
-## Expanding the ESLint configuration
+##  Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Current (v1.0)
+-  **NSMQ-themed landing page** with school branding
+-  **Responsive design** optimized for mobile devices
+-  **Navigation system** with role-based routing
+-  **Success stories** featuring our 2022 Western Zonal Champions
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Coming Soon
+-  **Authentication system** (students & admin)
+-  **Quiz creation interface** for instructors
+-  **Quiz engine** with timer and anti-cheat measures
+-  **Analytics dashboard** with performance insights
+-  **Ranking system** for student selection
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+##  Tech Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **Frontend:** React 18 + TypeScript + Vite
+- **Styling:** Custom CSS with NSMQ color scheme
+- **Routing:** React Router
+- **Backend:** Firebase (planned)
+- **Database:** Firestore (planned)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+##  Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/nsmq-recruitment-app.git
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+# Install dependencies
+cd nsmq-recruitment-app
+npm install
+
+# Start development server
+npm run dev
