@@ -2,7 +2,7 @@
 
 > Digital recruitment and training platform for Archbishop Porter Girls' Secondary School's NSMQ team selection
 
-##  Project OvervieW
+##  Project Overview
 
 This application revolutionizes the NSMQ student selection process by:
 - **Eliminating manual grading** - Reducing instructor workload from 2+ weeks to instant results
