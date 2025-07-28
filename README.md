@@ -1,4 +1,4 @@
-# NSMQ Recruitment App 🏆
+# NSMQ Recruitment App 
 
 > Digital recruitment and training platform for Archbishop Porter Girls' Secondary School's NSMQ team selection
 
