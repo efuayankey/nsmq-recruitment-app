@@ -2,18 +2,51 @@ import React from 'react';
 
 const StudentDashboard: React.FC = () => {
   return (
-    <div className="min-h-screen bg-nsmq-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-nsmq-blue mb-8">
+    <div style={{
+      minHeight: '60vh',
+      backgroundColor: '#f9fafb',
+      padding: '40px 20px'
+    }}>
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto'
+      }}>
+        <h1 style={{
+          fontSize: '2.5rem',
+          fontWeight: 'bold',
+          color: '#1e40af',
+          marginBottom: '32px',
+          textAlign: 'center',
+          margin: '0 0 32px 0'
+        }}>
           Student Dashboard
         </h1>
         
-        <div className="nsmq-card p-8 text-center">
-          <p className="text-nsmq-gray-500 text-lg">
-            🚧 Student dashboard coming soon!
-          </p>
-          <p className="text-sm text-nsmq-gray-400 mt-2">
-            This will include practice quizzes, scores, and progress tracking.
+        <div style={{
+          backgroundColor: 'white',
+          borderRadius: '16px',
+          padding: '48px',
+          textAlign: 'center',
+          boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)',
+          border: '1px solid #e5e7eb'
+        }}>
+          <div style={{ fontSize: '4rem', marginBottom: '24px' }}>👩‍🎓</div>
+          <h2 style={{
+            fontSize: '1.5rem',
+            fontWeight: '600',
+            color: '#1e40af',
+            marginBottom: '16px',
+            margin: '0 0 16px 0'
+          }}>
+            Welcome to Your Learning Hub!
+          </h2>
+          <p style={{
+            color: '#6b7280',
+            fontSize: '1.125rem',
+            margin: '0 0 32px 0',
+            lineHeight: '1.6'
+          }}>
+            🚧 Student dashboard coming soon! This will include practice quizzes, scores, progress tracking, and more.
           </p>
         </div>
       </div>

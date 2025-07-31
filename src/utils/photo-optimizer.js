@@ -132,7 +132,7 @@ const photoMetadata = [
     "team-2022.jpg",
     "Western Zonal Championship Team",
     2022,
-    ["Emma", "Sarah", "Joana"]
+    ["Efua", "Doreen", "Wiesmes"]
   ),
   generatePhotoMetadata(
     "nsmq-logo.png", 
@@ -141,7 +141,7 @@ const photoMetadata = [
   ),
   generatePhotoMetadata(
     "school-logo.png",
-    "[Your School Name] Official Logo", 
+    "APGSS Official Logo", 
     2024
   )
 ];
