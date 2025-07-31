@@ -1,15 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// Import components
+// Import components from separate files
 import Navbar from './components/layout/Navbar';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import StudentDashboard from './pages/student/Dashboard';
 import AdminDashboard from './pages/admin/Dashboard';
+// THIS IS THE KEY IMPORT! ⬇️
+import QuizEngine from './components/QuizEngine';
 
-// Simple Footer Component (inline)
+// Simple Footer Component
 const SimpleFooter: React.FC = () => {
   return (
     <footer style={{
@@ -60,6 +62,9 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            {/* QUIZ ROUTES USING IMPORTED COMPONENT ⬇️ */}
+            <Route path="/quiz" element={<QuizEngine />} />
+            <Route path="/practice" element={<QuizEngine />} />
             <Route path="/student/*" element={<StudentDashboard />} />
             <Route path="/admin/*" element={<AdminDashboard />} />
             
