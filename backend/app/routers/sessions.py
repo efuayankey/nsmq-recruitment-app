@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.core.redis import get_redis_client
 from app.core.security import get_current_user
-from app.models import QuizSession, SessionAnswer, User
+from app.models import Question, QuizSession, SessionAnswer, User
 from app.schemas import (
     AnswerResult,
     SessionResultsResponse,
@@ -68,8 +68,9 @@ def complete_session(
     session_id: int, db: Session = Depends(get_db), user: User = Depends(get_current_user)
 ) -> SessionResultsResponse:
     session = _get_owned_session(db, session_id, user)
-    answers = (
-        db.query(SessionAnswer)
+    rows = (
+        db.query(SessionAnswer, Question)
+        .join(Question, SessionAnswer.question_id == Question.id)
         .filter(SessionAnswer.session_id == session.id)
         .order_by(SessionAnswer.round_index, SessionAnswer.answered_at)
         .all()
@@ -83,11 +84,16 @@ def complete_session(
         answers=[
             {
                 "question_id": a.question_id,
+                "prompt": q.prompt,
+                "subject": q.subject.name,
+                "round_type": q.round_type.value,
                 "submitted_answer": a.submitted_answer,
+                "correct_answer": q.correct_answer,
+                "explanation": q.explanation,
                 "is_correct": a.is_correct,
                 "points_awarded": a.points_awarded,
                 "round_index": a.round_index,
             }
-            for a in answers
+            for a, q in rows
         ],
     )

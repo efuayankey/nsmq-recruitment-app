@@ -67,19 +67,24 @@ def test_start_session_builds_snapshot_from_published_questions(db: Session, sub
 
 
 def test_submit_answer_advances_within_round_then_completes(db: Session, subject: Subject):
-    _make_question(db, subject, prompt="q1", correct_answer="42")
-    _make_question(db, subject, prompt="q2", correct_answer="7")
+    # start_session samples/orders questions randomly, so don't assume which
+    # of the two questions lands first — look up whatever's actually current.
+    q1 = _make_question(db, subject, prompt="q1", correct_answer="42")
+    q2 = _make_question(db, subject, prompt="q2", correct_answer="7")
+    correct_answers = {q1.id: "42", q2.id: "7"}
 
     user = _make_user(db)
     request = StartSessionRequest(mode="round_practice", round_types=[RoundType.GENERAL], question_count=2)
     session = session_engine.start_session(db, user.id, request)
 
     assert session.current_question_index == 0
-    session_engine.submit_answer(db, session, "42", client_reported_time=5)
+    first_question_id = session.rounds_snapshot[0]["question_ids"][0]
+    session_engine.submit_answer(db, session, correct_answers[first_question_id], client_reported_time=5)
     assert session.current_question_index == 1
     assert session.status.value == "in_progress"
 
-    session_engine.submit_answer(db, session, "7", client_reported_time=5)
+    second_question_id = session.rounds_snapshot[0]["question_ids"][1]
+    session_engine.submit_answer(db, session, correct_answers[second_question_id], client_reported_time=5)
     assert session.status.value == "completed"
     assert session.completed_at is not None
     assert session.total_score == 20
