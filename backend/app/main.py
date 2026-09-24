@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
-from app.routers import auth, dashboard, leaderboards, questions, sessions
+from app.routers import auth, dashboard, leaderboards, questions, sessions, subjects
 
 app = FastAPI(title="NSMQ MasterQuiz API", version="0.1.0")
 
@@ -15,6 +15,7 @@ app.add_middleware(
 )
 
 app.include_router(auth.router)
+app.include_router(subjects.router)
 app.include_router(questions.router)
 app.include_router(sessions.router)
 app.include_router(dashboard.router)

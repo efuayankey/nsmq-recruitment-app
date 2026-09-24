@@ -35,6 +35,16 @@ class UserResponse(BaseModel):
     model_config = {"from_attributes": True}
 
 
+# ---- subjects ----
+
+
+class SubjectResponse(BaseModel):
+    id: int
+    name: str
+
+    model_config = {"from_attributes": True}
+
+
 # ---- questions ----
 
 

@@ -123,7 +123,7 @@ QUESTIONS = [
     ),
 ]
 
-ADMIN_EMAIL = "admin@nsmq.local"
+ADMIN_EMAIL = "admin@nsmqmasterquiz.com"
 ADMIN_PASSWORD = "changeme123"
 
 
