@@ -1,0 +1,47 @@
+# Render Blueprint — deploys the backend + a managed Postgres + a managed
+# Key Value (Redis-compatible) instance together.
+#
+# To use: push this repo to GitHub, then in the Render dashboard choose
+# "New > Blueprint" and point it at this repo/branch. Render reads this file
+# and provisions everything below. `free` plans are used as a starting point
+# — check current plan names/limits in the Render dashboard, they change.
+#
+# After the first deploy, set CORS_ORIGINS (below) to your actual deployed
+# Vercel frontend URL — it defaults to a placeholder.
+
+services:
+  - name: nsmq-backend
+    type: web
+    runtime: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /health
+    preDeployCommand: alembic upgrade head
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: nsmq-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: keyvalue
+          name: nsmq-redis
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: '["https://your-app.vercel.app"]'
+
+  - name: nsmq-redis
+    type: keyvalue
+    plan: free
+    ipAllowList:
+      - source: 0.0.0.0/0
+        description: allow all (tighten once the backend's static egress IP is known)
+
+databases:
+  - name: nsmq-db
+    plan: free
+    databaseName: nsmq
+    user: nsmq

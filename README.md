@@ -1,47 +1,56 @@
-# NSMQ Recruitment App 
+# NSMQ MasterQuiz
 
-> Digital recruitment and training platform for Archbishop Porter Girls' Secondary School's NSMQ team selection
+> Practice platform for Archbishop Porter Girls' Senior High School's NSMQ team selection — timed contest rounds, instant scoring, and progress tracking.
 
-##  Project Overview
+Not affiliated with NSMQ, Primetime Limited, or the Ghana Education Service.
 
-This application revolutionizes the NSMQ student selection process by:
-- **Eliminating manual grading** - Reducing instructor workload from 2+ weeks to instant results
-- **Accelerating selection** - Cut recruitment time by 95%
-- **Enabling 24/7 practice** - Students can train anytime, anywhere
-- **Providing data insights** - Analytics to identify top performers
+## Features
 
-##  Features
+- Auth for students and admins (JWT)
+- Admin-managed question bank across all 5 NSMQ round types — General Questions, Speed Race, Problem of the Day, True/False, and progressive-clue Riddles
+- Config-driven quiz session engine: Full Contest Simulation, Round Practice, Subject Practice, Quick Drill
+- Server-side scoring with answer normalization and numeric tolerance; server-authoritative per-question timers (Redis)
+- Session history, dashboard analytics (accuracy by subject/round, streaks), mistake review, and a leaderboard
 
-### Current (v1.0)
--  **NSMQ-themed landing page** with school branding
--  **Responsive design** optimized for mobile devices
--  **Navigation system** with role-based routing
--  **Success stories** featuring our 2022 Western Zonal Champions
+## Tech stack
 
-### Coming Soon
--  **Authentication system** (students & admin)
--  **Quiz creation interface** for instructors
--  **Quiz engine** with timer and anti-cheat measures
--  **Analytics dashboard** with performance insights
--  **Ranking system** for student selection
+- **Frontend:** Next.js (App Router) + TypeScript + Tailwind CSS
+- **Backend:** FastAPI + SQLAlchemy + Alembic
+- **Database:** PostgreSQL
+- **Cache / session timers:** Redis
+- **Local dev:** Docker Compose
 
-##  Tech Stack
+## Getting started (local dev)
 
-- **Frontend:** React 18 + TypeScript + Vite
-- **Styling:** Custom CSS with NSMQ color scheme
-- **Routing:** React Router
-- **Backend:** Firebase (planned)
-- **Database:** Firestore (planned)
-
-##  Getting Started
+Requires Docker.
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/nsmq-recruitment-app.git
+cp backend/.env.example backend/.env
+cp frontend/.env.example frontend/.env
 
-# Install dependencies
-cd nsmq-recruitment-app
-npm install
+docker compose up -d
+docker compose exec backend python -m scripts.seed   # sample questions + demo admin login
+```
 
-# Start development server
-npm run dev
+- Frontend: http://localhost:3000 (or whatever port you mapped in `docker-compose.yml` if 3000 is taken locally)
+- Backend API + docs: http://localhost:8000/docs
+
+Run the backend test suite:
+
+```bash
+docker compose exec backend pytest -q
+```
+
+## Deployment
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) — frontend on Vercel, backend + Postgres + Redis on Render (`render.yaml` at the repo root).
+
+## Project structure
+
+```
+frontend/   Next.js app
+backend/    FastAPI app, Alembic migrations, pytest suite
+docker-compose.yml
+render.yaml
+.github/workflows/ci.yml
+```
