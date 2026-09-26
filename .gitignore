@@ -22,3 +22,22 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Never push the private spec/plan docs, the working learning log, or CLAUDE.md files
+DONT PUSH/
+learning.txt
+CLAUDE.md
+**/CLAUDE.md
+
+# Python / backend
+backend/__pycache__/
+backend/**/__pycache__/
+backend/.venv/
+backend/venv/
+backend/*.egg-info/
+backend/.pytest_cache/
+.env
+!.env.example
+
+# Docker
+*.env.local
