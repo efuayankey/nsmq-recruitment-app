@@ -17,12 +17,11 @@ services:
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
     healthCheckPath: /health
-    # preDeployCommand needs a paid plan; running migrations as part of the
-    # container's own start command works on free tier too, and matches how
-    # docker-compose.yml runs them locally. Render assigns its own $PORT for
-    # docker services (not necessarily 8000), so the app must bind to that.
-    dockerCommand: >-
-      sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"
+    # No dockerCommand here on purpose: preDeployCommand needs a paid plan,
+    # and Render's dockerCommand string-parsing mangled a manual `sh -c "…"`
+    # (it doesn't cross-platform reliably like Compose's `command:` does).
+    # backend/docker-entrypoint.sh (the Dockerfile's CMD) runs migrations
+    # then execs uvicorn bound to Render's injected $PORT instead.
     envVars:
       - key: DATABASE_URL
         fromDatabase:
